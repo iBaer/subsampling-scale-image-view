@@ -867,9 +867,13 @@ public class SubsamplingScaleImageView extends View {
                 sCenter.y = sHeight()/2;
             }
         }
+        Log.w(TAG, "Global doubleTapZoomScale "+ SubsamplingScaleImageView.this.doubleTapZoomScale);
         float doubleTapZoomScale = Math.min(maxScale, SubsamplingScaleImageView.this.doubleTapZoomScale);
         boolean zoomIn = scale <= doubleTapZoomScale * 0.9;
+        Log.w(TAG, "Scale "+ scale+" | doubleTapZoomScale "+ doubleTapZoomScale);
         float targetScale = zoomIn ? doubleTapZoomScale : minScale();
+        Log.w(TAG, "MinScale "+minScale()+" | Target scale "+ targetScale);
+
         if (doubleTapZoomStyle == ZOOM_FOCUS_CENTER_IMMEDIATE) {
             setScaleAndCenter(targetScale, sCenter);
         } else if (doubleTapZoomStyle == ZOOM_FOCUS_CENTER || !zoomIn || !panEnabled) {
@@ -1219,9 +1223,9 @@ public class SubsamplingScaleImageView extends View {
      */
     private boolean tileVisible(Tile tile) {
         float sVisLeft = viewToSourceX(0),
-            sVisRight = viewToSourceX(getWidth()),
-            sVisTop = viewToSourceY(0),
-            sVisBottom = viewToSourceY(getHeight());
+                sVisRight = viewToSourceX(getWidth()),
+                sVisTop = viewToSourceY(0),
+                sVisBottom = viewToSourceY(getHeight());
         return !(sVisLeft > tile.sRect.right || tile.sRect.left > sVisRight || sVisTop > tile.sRect.bottom || tile.sRect.top > sVisBottom);
     }
 
@@ -1989,10 +1993,10 @@ public class SubsamplingScaleImageView extends View {
      */
     private Rect sourceToViewRect(Rect sRect, Rect vTarget) {
         vTarget.set(
-            (int)sourceToViewX(sRect.left),
-            (int)sourceToViewY(sRect.top),
-            (int)sourceToViewX(sRect.right),
-            (int)sourceToViewY(sRect.bottom)
+                (int)sourceToViewX(sRect.left),
+                (int)sourceToViewY(sRect.top),
+                (int)sourceToViewX(sRect.right),
+                (int)sourceToViewY(sRect.bottom)
         );
         return vTarget;
     }
@@ -2706,8 +2710,8 @@ public class SubsamplingScaleImageView extends View {
             anim.sCenterEnd = targetSCenter;
             anim.vFocusStart = sourceToViewCoord(targetSCenter);
             anim.vFocusEnd = new PointF(
-                vxCenter,
-                vyCenter
+                    vxCenter,
+                    vyCenter
             );
             anim.duration = duration;
             anim.interruptible = interruptible;
