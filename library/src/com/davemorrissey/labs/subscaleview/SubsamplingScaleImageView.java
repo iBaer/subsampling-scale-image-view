@@ -766,7 +766,8 @@ public class SubsamplingScaleImageView extends View {
                                 boolean edgeXSwipe = atXEdge && dx*0.5 > dy && !isPanning;
                                 // dy > 5 allows for better diagonally panning than > 15
                                 boolean yPan = lastY == vTranslate.y && dy > 5;
-
+                                Log.w(TAG, "atXEdge "+ atXEdge+" | edgeXSwipe "+ edgeXSwipe+" | yPan "+ yPan);
+                                Log.w(TAG, "lastY "+ lastY+" | vTranslate.y "+ vTranslate.y+" | dy "+ dy);
                                 if (!edgeXSwipe && (!atXEdge || yPan || isPanning)) {
                                     isPanning = true;
                                 } else if (dx > 5) {
